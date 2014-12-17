@@ -358,9 +358,9 @@ var makeRandomPizza = function() {
   return pizza;
 }
 
-var pizzaElementTemplate = document.createElement('img');
-pizzaElementTemplate.src = "images/pizza.png";
-pizzaElementTemplate.classList.add("img-responsive");
+//var pizzaElementTemplate = document.createElement('img');
+//pizzaElementTemplate.src = "images/pizza.png";
+//pizzaElementTemplate.classList.add("img-responsive");
 
 // returns a DOM element for each pizza
 var pizzaElementGenerator = function(i) {
@@ -373,8 +373,8 @@ var pizzaElementGenerator = function(i) {
 
   pizzaContainer  = document.createElement("div");
   pizzaImageContainer = document.createElement("div");
-  //pizzaImage = document.createElement("img");
-  pizzaImage = pizzaElementTemplate.cloneNode();
+  pizzaImage = document.createElement("img");
+  //pizzaImage = pizzaElementTemplate.cloneNode();
   pizzaDescriptionContainer = document.createElement("div");
 
   pizzaContainer.classList.add("randomPizzaContainer");
@@ -383,8 +383,8 @@ var pizzaElementGenerator = function(i) {
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
   pizzaImageContainer.classList.add("col-md-6");
 
-  /*pizzaImage.src = "images/pizza.png";
-  pizzaImage.classList.add("img-responsive"); */
+  pizzaImage.src = "images/pizza.png";
+  pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
 
@@ -542,25 +542,30 @@ function updatePositions() {
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
-var slidingPizzaTemplate = document.createElement('img');
-slidingPizzaTemplate.className = 'mover';
-slidingPizzaTemplate.src = "images/pizza.png";
-slidingPizzaTemplate.style.height = "100px";
-slidingPizzaTemplate.style.width = "73.333px";
+//var slidingPizzaTemplate = document.createElement('img');
+//slidingPizzaTemplate.className = 'mover';
+//slidingPizzaTemplate.src = "images/pizza.png";
+//slidingPizzaTemplate.style.height = "100px";
+//slidingPizzaTemplate.style.width = "73.333px";
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
+  window.performance.mark("mark_start_loadevent");
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 30; i++) {
-    var elem = slidingPizzaTemplate.cloneNode();
-    /*.createElement('img');
+  for (var i = 0; i < 200; i++) {
+    //var elem = slidingPizzaTemplate.cloneNode();
+    var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
-    elem.style.width = "73.333px";*/
+    elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
+  window.performance.mark("mark_end_loadevent");
+  window.performance.measure("measure_domload_event", "mark_start_loadevent", "mark_end_loadevent");
+  var timeToGenerate = window.performance.getEntriesByName("measure_domload_event");
+  console.log('Time to complete "DomContentLoaded" function: ' + timeToGenerate[0].duration);
 });
