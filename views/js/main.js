@@ -358,6 +358,7 @@ var makeRandomPizza = function() {
   return pizza;
 }
 
+// the variable pizzaElementTemplate provides a template to be used by the function pizzaElementGenerator
 var pizzaElementTemplate = document.createElement('img');
 pizzaElementTemplate.src = "images/pizza.png";
 pizzaElementTemplate.classList.add("img-responsive");
@@ -373,7 +374,6 @@ var pizzaElementGenerator = function(i) {
 
   pizzaContainer  = document.createElement("div");
   pizzaImageContainer = document.createElement("div");
-  //pizzaImage = document.createElement("img");
   pizzaImage = pizzaElementTemplate.cloneNode();
   pizzaDescriptionContainer = document.createElement("div");
 
@@ -383,8 +383,6 @@ var pizzaElementGenerator = function(i) {
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
   pizzaImageContainer.classList.add("col-md-6");
 
-  //pizzaImage.src = "images/pizza.png";
-  //pizzaImage.classList.add("img-responsive");
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
 
@@ -457,6 +455,7 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
     var allPizzas = document.querySelectorAll(".randomPizzaContainer");
     var allPizzasLength = allPizzas.length;
+
     for (var i = 0; i < allPizzasLength; i++) {
       var dx = determineDx(allPizzas[i], size);
       var newwidth = (allPizzas[i].offsetWidth + dx) + 'px';
@@ -476,14 +475,11 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-//var pizzasFragment = document.createDocumentFragment();
 var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
-//  pizzasFragment.appendChild(pizzaElementGenerator(i));
 }
-//pizzasDiv.appendChild(pizzasFragment);
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
@@ -495,7 +491,7 @@ console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "
 // Used by updatePositions() to decide when to log the average time per frame
 var frame = 0;
 
-// Logs the average amount of time per 10 frames needed to move the sliding background pizzas on scroll.
+// Logs the average amount of time per 60 frames needed to move the sliding background pizzas on scroll.
 function logAverageFrame(times) {   // times is the array of User Timing measurements from updatePositions()
   var numberOfEntries = times.length;
   var sum = 0;
@@ -520,6 +516,7 @@ function updatePositions() {
   var items = document.querySelectorAll('.mover');
   var itemsLength = items.length;
   var _phase = document.body.scrollTop / 1250
+
   for (var i = 0; i < itemsLength; i++) {
     var phase = Math.sin(_phase + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
@@ -542,11 +539,13 @@ function updatePositions() {
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
 
+// The var below provides a template to be used by the .addEventListener('DOMContentLoaded') function
 var slidingPizzaTemplate = document.createElement('img');
 slidingPizzaTemplate.className = 'mover';
 slidingPizzaTemplate.src = "images/pizza.png";
 slidingPizzaTemplate.style.height = "100px";
 slidingPizzaTemplate.style.width = "73.333px";
+
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   window.performance.mark("mark_start_loadevent");
@@ -554,16 +553,12 @@ document.addEventListener('DOMContentLoaded', function() {
   var s = 256;
   for (var i = 0; i < 200; i++) {
     var elem = slidingPizzaTemplate.cloneNode();
-    //var elem = document.createElement('img');
-    //elem.className = 'mover';
-    //elem.src = "images/pizza.png";
-    //elem.style.height = "100px";
-    //elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     document.querySelector("#movingPizzas1").appendChild(elem);
   }
   updatePositions();
+  
   window.performance.mark("mark_end_loadevent");
   window.performance.measure("measure_domload_event", "mark_start_loadevent", "mark_end_loadevent");
   var timeToGenerate = window.performance.getEntriesByName("measure_domload_event");
