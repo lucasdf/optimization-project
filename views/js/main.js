@@ -550,7 +550,14 @@ document.addEventListener('DOMContentLoaded', function() {
   window.performance.mark("mark_start_loadevent");
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+
+ // var s = Math.ceil(screen.width 
+
+  // Get the max number of visible sliding pizzas according to the user screen size
+  var max = Math.ceil(screen.height / s) * cols;
+
+  console.log(max);
+  for (var i = 0; i < max; i++) {
     var elem = slidingPizzaTemplate.cloneNode();
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
