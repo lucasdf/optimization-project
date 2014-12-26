@@ -557,7 +557,7 @@ document.addEventListener('DOMContentLoaded', function() {
   window.performance.mark("mark_start_loadevent");
   var cols = 8;
   var s = 256;
-  for (var i = 0; i < 200; i++) {
+  for (var i = 0; i < 120; i++) {
     var elem = slidingPizzaTemplate.cloneNode();
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
