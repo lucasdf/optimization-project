@@ -360,7 +360,7 @@ var makeRandomPizza = function() {
 
 // the variable pizzaElementTemplate provides a template to be used by the function pizzaElementGenerator
 var pizzaElementTemplate = document.createElement('img');
-pizzaElementTemplate.src = "images/pizza.jpg";
+pizzaElementTemplate.src = "images/pizza.png";
 pizzaElementTemplate.classList.add("img-responsive");
 
 // returns a DOM element for each pizza
@@ -541,7 +541,7 @@ window.addEventListener('scroll', updatePositions);
 // The var below provides a template to be used by the .addEventListener('DOMContentLoaded') function
 var slidingPizzaTemplate = document.createElement('img');
 slidingPizzaTemplate.className = 'mover';
-slidingPizzaTemplate.src = "images/pizza.jpg";
+slidingPizzaTemplate.src = "images/pizza.png";
 slidingPizzaTemplate.style.height = "100px";
 slidingPizzaTemplate.style.width = "73.333px";
 
