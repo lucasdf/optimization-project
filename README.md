@@ -1,65 +1,34 @@
 ## Website Performance Optimization portfolio project
+This is the page for my final project for the class [Critical Rendering Path course](https://www.udacity.com/course/ud884), which is part of the Front-end Web Developer Nanodegree. The original files can be found [here](https://github.com/udacity/frontend-nanodegree-mobile-portfolio). The changes presented on this document are related to the subpage "/views/pizza.html".
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+## PageSpeed
+[Link](https://developers.google.com/speed/pagespeed/insights/?url=http%3A%2F%2Flucasdf.github.io%2Foptimization-project%2Fviews%2Fpizza.html)
+Mobile: 96/100 Speed
+Desktop: 95/100
 
-To get started, check out the repository, inspect the code,
+## Resources
+http://cssminifier.com/
+http://javascript-minifier.com/
+https://tinypng.com/
 
-### Getting started
+## Changelog
+CSS - stylesheet.css
+1. The two original CSS files were merged into one, reducing the number of downloads needed.
+2. The CSS file was minified (stylesheet-min.css).
+3. The CSS loading tag was moved to the end of the HTML file.
 
-Some useful tips to help you get started:
+JavaScript - main.js
+1. Added a "template" variable to be used with the ".cloneNode()" function. I noted a slight improvement on the performance (time to load the page) using this approach. (Lines 362 and 542).
+2. The loop inside "function changePizzaSizes" was optimized (Line 455).
+3. The loop responsible for appending the sliding pizzas was optimized (Line 478).
+4. The loop inside "function updatePositions()" was optimized (Line 515).
+5. The loop responsible for generate the sliding pizzas was optimized (Line 557).
+6. The number of sliding pizzas to be generate was adjusted according to the screen size of the user, avoiding the creation of sliding pizzas that would never be displayed (Line 555).
+7. A few changes on the performance.mark (Lines 501, 532 and 550).
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+Images - pizzeria.jpg and pizza.png
+1. Both files were compressed, achieving a great reduction on the size. The file "pizzeria.jpg" changed from 2370kb to 32kb, and the file "pizza.png" changed from 49kb to 10kb.
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
-
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
-
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ngrok 8080
-  ```
-
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
-
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
-
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
-
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
-
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
-
-### Sample Portfolios
-
-Feeling uninspired by the portfolio? Here's a list of cool portfolios I found after a few minutes of Googling.
-
-* <a href="http://www.reddit.com/r/webdev/comments/280qkr/would_anybody_like_to_post_their_portfolio_site/">A great discussion about portfolios on reddit</a>
-* <a href="http://ianlunn.co.uk/">http://ianlunn.co.uk/</a>
-* <a href="http://www.adhamdannaway.com/portfolio">http://www.adhamdannaway.com/portfolio</a>
-* <a href="http://www.timboelaars.nl/">http://www.timboelaars.nl/</a>
-* <a href="http://futoryan.prosite.com/">http://futoryan.prosite.com/</a>
-* <a href="http://playonpixels.prosite.com/21591/projects">http://playonpixels.prosite.com/21591/projects</a>
-* <a href="http://colintrenter.prosite.com/">http://colintrenter.prosite.com/</a>
-* <a href="http://calebmorris.prosite.com/">http://calebmorris.prosite.com/</a>
-* <a href="http://www.cullywright.com/">http://www.cullywright.com/</a>
-* <a href="http://yourjustlucky.com/">http://yourjustlucky.com/</a>
-* <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
-* <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
-* <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
+## Notes
+1. I was unable to achieve a score higher than 87 for Mobile without moving the CSS to be loaded on the end of HTML file. This is not the optimal solution because it may cause a Flash of Unstyled Content (FOUC). The other solutions to achieve a higher score without doing so could be to inline portions of the CSS, which I don't particularly like, and set appropriate cache of the resources, which I am unable to do while using Githut Pages.
+2. I could have optimized the CSS more if I had removed unnecessary classes from the file.
